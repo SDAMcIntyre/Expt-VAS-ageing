@@ -76,6 +76,14 @@ dataFile.write('trialnum,question,rating\n')
 
 # ----
 
+# -- SETUP CONFIRMATION SOUND --
+
+pygame.mixer.pre_init() 
+pygame.mixer.init()
+pingSound = pygame.mixer.Sound('ping.wav')
+
+# ----
+
 
 # -- SETUP VISUAL ANALOG SCALES AND VISUAL PROMPTS --
 
@@ -148,6 +156,10 @@ else:
                 print ('user aborted')
                 dataFile.close()
                 core.quit()
+        
+        soundCh = pingSound.play()
+        while soundCh.get_busy():
+            pass
         
         ## check rating
         if exptInfo['04. Question'] == 'pleasantness':
